@@ -1,0 +1,970 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Groundwater & Land Subsidence Research Guide — Nepal & Bangladesh</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=IBM+Plex+Mono:wght@400;600&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0b0f1a;
+    --surface: #111827;
+    --surface2: #1a2235;
+    --accent: #00d4ff;
+    --accent2: #38ef7d;
+    --accent3: #f7971e;
+    --warn: #ff6b6b;
+    --text: #e8eaf0;
+    --muted: #8896a8;
+    --border: rgba(0,212,255,0.15);
+    --glow: 0 0 20px rgba(0,212,255,0.15);
+  }
+
+  * { margin:0; padding:0; box-sizing:border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Libre Baskerville', Georgia, serif;
+    font-size: 15px;
+    line-height: 1.75;
+  }
+
+  /* HERO */
+  .hero {
+    background: linear-gradient(135deg, #0b0f1a 0%, #0d1f35 50%, #0b1a2e 100%);
+    border-bottom: 1px solid var(--border);
+    padding: 60px 40px 50px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content:'';
+    position:absolute;
+    top:-60px; left:-60px;
+    width:400px; height:400px;
+    background: radial-gradient(circle, rgba(0,212,255,0.08), transparent 70%);
+    pointer-events:none;
+  }
+  .hero::after {
+    content:'';
+    position:absolute;
+    bottom:-80px; right:-80px;
+    width:500px; height:500px;
+    background: radial-gradient(circle, rgba(56,239,125,0.05), transparent 70%);
+    pointer-events:none;
+  }
+  .hero-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 3px;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-bottom: 18px;
+  }
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(24px, 4vw, 42px);
+    font-weight: 900;
+    line-height: 1.2;
+    max-width: 800px;
+    background: linear-gradient(135deg, #ffffff, #a8d8ff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 16px;
+  }
+  .hero p {
+    color: var(--muted);
+    max-width: 680px;
+    font-size: 14px;
+  }
+  .hero-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 24px;
+  }
+  .tag {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    padding: 4px 12px;
+    border-radius: 20px;
+    border: 1px solid var(--border);
+    color: var(--accent);
+    background: rgba(0,212,255,0.05);
+  }
+
+  /* LAYOUT */
+  .container { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
+
+  /* SECTION */
+  section { padding: 48px 40px; border-bottom: 1px solid rgba(255,255,255,0.05); }
+  section:last-child { border-bottom: none; }
+
+  .section-head {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 32px;
+  }
+  .section-num {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    color: var(--accent);
+    letter-spacing: 2px;
+    min-width: 30px;
+  }
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 24px;
+    font-weight: 700;
+    color: #fff;
+  }
+  .section-line {
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(to right, var(--border), transparent);
+  }
+
+  /* PAPER CARDS */
+  .paper-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 24px;
+    margin-bottom: 20px;
+    position: relative;
+    transition: border-color 0.3s, box-shadow 0.3s;
+  }
+  .paper-card:hover {
+    border-color: var(--accent);
+    box-shadow: var(--glow);
+  }
+  .paper-badge {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    padding: 3px 10px;
+    border-radius: 20px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    display: inline-block;
+    margin-bottom: 10px;
+  }
+  .badge-open { background: rgba(56,239,125,0.12); color: var(--accent2); border: 1px solid rgba(56,239,125,0.3); }
+  .badge-doi { background: rgba(247,151,30,0.12); color: var(--accent3); border: 1px solid rgba(247,151,30,0.3); }
+  .badge-free { background: rgba(0,212,255,0.12); color: var(--accent); border: 1px solid rgba(0,212,255,0.3); }
+
+  .paper-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 16px;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 6px;
+    line-height: 1.4;
+  }
+  .paper-meta {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    color: var(--muted);
+    margin-bottom: 10px;
+  }
+  .paper-desc {
+    font-size: 13.5px;
+    color: #b0bcc8;
+    line-height: 1.7;
+    margin-bottom: 14px;
+  }
+  .paper-findings {
+    background: rgba(0,212,255,0.04);
+    border-left: 3px solid var(--accent);
+    padding: 10px 14px;
+    border-radius: 0 6px 6px 0;
+    font-size: 12.5px;
+    color: #90afc0;
+    margin-bottom: 14px;
+  }
+  .paper-findings strong { color: var(--accent); font-family: 'IBM Plex Mono', monospace; font-size: 11px; }
+  .download-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: linear-gradient(135deg, rgba(0,212,255,0.1), rgba(56,239,125,0.08));
+    border: 1px solid rgba(0,212,255,0.3);
+    color: var(--accent);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 8px 16px;
+    border-radius: 6px;
+    text-decoration: none;
+    letter-spacing: 1px;
+    transition: all 0.2s;
+  }
+  .download-btn:hover {
+    background: rgba(0,212,255,0.2);
+    box-shadow: 0 0 15px rgba(0,212,255,0.2);
+  }
+  .download-btn svg { width:13px; height:13px; }
+
+  /* SATELLITE TABLE */
+  .sat-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+  }
+  .sat-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    overflow: hidden;
+    transition: border-color 0.3s, box-shadow 0.3s;
+  }
+  .sat-card:hover {
+    border-color: var(--accent);
+    box-shadow: var(--glow);
+  }
+  .sat-header {
+    padding: 16px 20px 14px;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+  .sat-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 17px;
+    font-weight: 700;
+    color: #fff;
+  }
+  .sat-role {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    color: var(--muted);
+    margin-top: 3px;
+  }
+  .sat-type-badge {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    padding: 3px 9px;
+    border-radius: 4px;
+    font-weight: 600;
+  }
+  .type-sar { background: rgba(247,151,30,0.15); color: var(--accent3); }
+  .type-gravity { background: rgba(56,239,125,0.15); color: var(--accent2); }
+  .type-optical { background: rgba(200,120,255,0.15); color: #c87cff; }
+  .type-model { background: rgba(255,107,107,0.15); color: var(--warn); }
+
+  .sat-body { padding: 16px 20px; }
+  .sat-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: 5px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+    font-size: 12.5px;
+  }
+  .sat-row:last-child { border-bottom: none; }
+  .sat-key {
+    color: var(--muted);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    min-width: 120px;
+  }
+  .sat-val { color: var(--text); text-align: right; font-size: 12px; }
+  .sat-val.highlight { color: var(--accent); font-family: 'IBM Plex Mono', monospace; }
+
+  /* DATA TABLE */
+  .data-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+  }
+  .data-table th {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--accent);
+    padding: 10px 16px;
+    text-align: left;
+    border-bottom: 1px solid var(--border);
+    background: rgba(0,212,255,0.03);
+  }
+  .data-table td {
+    padding: 11px 16px;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+    vertical-align: top;
+    color: #b8c8d5;
+    font-size: 12.5px;
+  }
+  .data-table tr:hover td { background: rgba(0,212,255,0.03); }
+  .data-table td:first-child { color: #fff; font-weight: bold; font-size: 12px; }
+  .mono { font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: var(--accent2); }
+  .link-cell a {
+    color: var(--accent);
+    text-decoration: none;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    border-bottom: 1px dotted rgba(0,212,255,0.4);
+  }
+  .link-cell a:hover { color: var(--accent2); }
+
+  /* METHODOLOGY */
+  .flow-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+  }
+  .flow-step {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 18px;
+    position: relative;
+  }
+  .flow-num {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 28px;
+    font-weight: 600;
+    color: rgba(0,212,255,0.15);
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+  .flow-title { font-size: 13px; font-weight: 700; color: #fff; margin-bottom: 6px; }
+  .flow-desc { font-size: 12px; color: var(--muted); line-height: 1.6; }
+
+  /* AI SECTION */
+  .ai-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 16px;
+  }
+  .ai-card {
+    background: var(--surface);
+    border: 1px solid rgba(56,239,125,0.15);
+    border-radius: 8px;
+    padding: 18px;
+  }
+  .ai-icon { font-size: 22px; margin-bottom: 10px; }
+  .ai-title { font-size: 13px; font-weight: 700; color: var(--accent2); margin-bottom: 6px; }
+  .ai-desc { font-size: 12px; color: var(--muted); line-height: 1.6; }
+
+  /* FOOTER */
+  .footer-note {
+    background: var(--surface);
+    padding: 24px 40px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    border-top: 1px solid var(--border);
+  }
+  .footer-icon { font-size: 20px; }
+  .footer-text { font-size: 12px; color: var(--muted); }
+  .footer-text strong { color: var(--accent2); }
+
+  /* TABLE WRAPPER */
+  .table-wrap {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    overflow: hidden;
+  }
+
+  /* INLINE NOTE */
+  .note-box {
+    background: rgba(247,151,30,0.07);
+    border: 1px solid rgba(247,151,30,0.2);
+    border-radius: 8px;
+    padding: 14px 18px;
+    margin-bottom: 24px;
+    font-size: 13px;
+    color: #c0a070;
+  }
+  .note-box strong { color: var(--accent3); }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-label">📡 Research Reference Guide · Remote Sensing Hydrology</div>
+  <h1>AI-Based Monitoring & Prediction of Groundwater Depletion and Land Subsidence<br>in Nepal & Bangladesh</h1>
+  <p>A curated reference compiling key research papers, satellite specifications, data download portals, and methodological workflows for studies using GRACE, GRACE-FO, and InSAR data.</p>
+  <div class="hero-tags">
+    <span class="tag">GRACE-FO</span>
+    <span class="tag">Sentinel-1 InSAR</span>
+    <span class="tag">SBAS / PS-InSAR</span>
+    <span class="tag">GLDAS</span>
+    <span class="tag">ALOS-2 PALSAR-2</span>
+    <span class="tag">Nepal · Bangladesh</span>
+    <span class="tag">Machine Learning</span>
+  </div>
+</div>
+
+<!-- SECTION 1: KEY RESEARCH PAPERS -->
+<section>
+  <div class="section-head">
+    <span class="section-num">01</span>
+    <h2 class="section-title">Key Research Papers — Direct Download Links</h2>
+    <div class="section-line"></div>
+  </div>
+
+  <div class="note-box">
+    <strong>⚠ Access Note:</strong> Papers marked OPEN ACCESS can be downloaded directly for free. DOI papers require institutional access or a request via ResearchGate/Sci-Hub. Click the link button to go directly to each paper.
+  </div>
+
+  <!-- Paper 1 -->
+  <div class="paper-card">
+    <span class="paper-badge badge-open">✓ OPEN ACCESS</span>
+    <div class="paper-title">Study on the Relationship between Groundwater and Land Subsidence in Bangladesh Combining GRACE and InSAR</div>
+    <div class="paper-meta">Ouyang L., Zhao Z., Zhou D. et al. · Remote Sensing (MDPI) · Vol. 16, No. 19 · October 2024 · DOI: 10.3390/rs16193715</div>
+    <div class="paper-desc">
+      This is the most directly relevant paper to your topic. It uses GRACE + GLDAS data merged to analyze groundwater storage changes across Bangladesh, while SBAS-InSAR technology assesses land subsidence. Dynamic Time Warping (DTW) is applied to find correlations between groundwater time series and subsidence patterns. Precipitation and land cover data are incorporated.
+    </div>
+    <div class="paper-findings">
+      <strong>KEY FINDING →</strong> Groundwater storage in Bangladesh is declining at −5.55 mm/year on average. The worst declines are in Rangpur, Mymensingh, and Rajshahi divisions. The SBAS-InSAR time series uses free LiCSAR Sentinel-1 interferograms, corrected with GACOS atmospheric products.
+    </div>
+    <a class="download-btn" href="https://www.mdpi.com/2072-4292/16/19/3715" target="_blank">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+      DOWNLOAD PDF — mdpi.com
+    </a>
+  </div>
+
+  <!-- Paper 2 -->
+  <div class="paper-card">
+    <span class="paper-badge badge-open">✓ OPEN ACCESS</span>
+    <div class="paper-title">Land Subsidence Monitoring Using InSAR Technique in the Southwestern Region of Bangladesh</div>
+    <div class="paper-meta">Multiple Authors · Geomatics, Natural Hazards and Risk · Taylor & Francis · April 2024 · DOI: 10.1080/19475705.2024.2333795</div>
+    <div class="paper-desc">
+      Employs InSAR analysis spanning 2014–2022 to measure and spatially visualize land subsidence in the Ganges-Brahmaputra Delta (GBD) region of southwestern Bangladesh. Uses Sentinel-1 SAR data for the entire period. Combines sediment compaction, tectonic factors, and human activity analysis.
+    </div>
+    <div class="paper-findings">
+      <strong>KEY FINDING →</strong> Subsidence rates range from 3–20 mm/year, with most areas experiencing 3–10 mm/year. The southwest region shows the highest depletion rate.
+    </div>
+    <a class="download-btn" href="https://www.tandfonline.com/doi/full/10.1080/19475705.2024.2333795" target="_blank">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+      ACCESS PAPER — tandfonline.com
+    </a>
+  </div>
+
+  <!-- Paper 3 -->
+  <div class="paper-card">
+    <span class="paper-badge badge-open">✓ OPEN ACCESS</span>
+    <div class="paper-title">Subsidence in the Kathmandu Basin, Before and After the 2015 Mw 7.8 Gorkha Earthquake, Nepal Revealed from SBAS-DInSAR Analysis</div>
+    <div class="paper-meta">Multiple Authors · GIScience & Remote Sensing · Taylor & Francis · 2018 · DOI: 10.1080/15481603.2017.1422312</div>
+    <div class="paper-desc">
+      Directly addresses Nepal's Kathmandu Basin using SBAS-DInSAR with 16 ALOS-1 PALSAR images (pre-seismic) and 26 Sentinel-1 A/B SAR images (pre/post-earthquake). Groundwater level data from wells show a significant decline from 2000–2014, correlated with subsidence zones.
+    </div>
+    <div class="paper-findings">
+      <strong>KEY FINDING →</strong> InSAR LOS deformation from Sentinel-1A shows strong correlation with GPS station measurements. Groundwater depletion is identified as the dominant driver of anthropogenic subsidence in the Kathmandu valley.
+    </div>
+    <a class="download-btn" href="https://www.tandfonline.com/doi/full/10.1080/15481603.2017.1422312" target="_blank">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+      ACCESS PAPER — tandfonline.com
+    </a>
+  </div>
+
+  <!-- Paper 4 -->
+  <div class="paper-card">
+    <span class="paper-badge badge-open">✓ OPEN ACCESS</span>
+    <div class="paper-title">Global Land Subsidence Mapping Reveals Widespread Loss of Aquifer Storage Capacity</div>
+    <div class="paper-meta">Hasan M.F., Smith R., Vajedian S. et al. · Nature Communications · Vol. 14 · October 2023 · DOI: 10.1038/s41467-023-41933-z</div>
+    <div class="paper-desc">
+      Develops a machine learning approach to map subsidence globally using InSAR observations as training data. The paper explores subsidence drivers and identifies regions under high groundwater stress including South Asia. Highly cited and methodologically relevant for AI-based prediction.
+    </div>
+    <div class="paper-findings">
+      <strong>KEY FINDING →</strong> InSAR provides ~1 cm accuracy at ~100 m spatial resolution. The ML model generalizes subsidence predictions to data-sparse regions like Nepal and Bangladesh.
+    </div>
+    <a class="download-btn" href="https://www.nature.com/articles/s41467-023-41933-z" target="_blank">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+      DOWNLOAD — nature.com (Open Access)
+    </a>
+  </div>
+
+  <!-- Paper 5 -->
+  <div class="paper-card">
+    <span class="paper-badge badge-open">✓ OPEN ACCESS</span>
+    <div class="paper-title">Monitoring Groundwater Storage Basins and Hydrological Changes in the Indo-Gangetic Basin Using InSAR and GRACE</div>
+    <div class="paper-meta">ISPRS Archives · ASPRS Annual Conference 2023 · Denver, CO · DOI: 10.5194/isprs-archives-XLVIII-M-3-2023-95-2023</div>
+    <div class="paper-desc">
+      Covers the full Indo-Gangetic Plain which includes southern Nepal and virtually all of Bangladesh. Uses Sentinel-1 InSAR and GRACE satellite pair for characterizing hydrological dynamics. Combines U-Net deep learning architecture with InSAR and GRACE time series.
+    </div>
+    <div class="paper-findings">
+      <strong>KEY FINDING →</strong> Around 1 meter of subsidence occurred in parts of Northern India between 2018 and 2023. InSAR time series reveals coherent seasonal uplift–subsidence cycles matching monsoon hydrology.
+    </div>
+    <a class="download-btn" href="https://isprs-archives.copernicus.org/articles/XLVIII-M-3-2023/95/2023/isprs-archives-XLVIII-M-3-2023-95-2023.pdf" target="_blank">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+      DOWNLOAD PDF — copernicus.org
+    </a>
+  </div>
+
+  <!-- Paper 6 -->
+  <div class="paper-card">
+    <span class="paper-badge badge-open">✓ OPEN ACCESS</span>
+    <div class="paper-title">Groundwater Under the Lens: A Remote Sensing Exploration of Storage Patterns and Trends in Bangladesh</div>
+    <div class="paper-meta">Multiple Authors · Journal of Water and Climate Change · IWA Publishing · 2025</div>
+    <div class="paper-desc">
+      Uses GRACE and GLDAS data to study spatial and temporal groundwater storage patterns across all regions of Bangladesh. Mann–Kendall trend tests reveal significant depletion gradients. Machine learning algorithms are reviewed for groundwater anomaly detection.
+    </div>
+    <div class="paper-findings">
+      <strong>KEY FINDING →</strong> The southwestern region shows the highest depletion slope of −4.18 mm/year. The northeast shows a marginal increase in GWS. Overextraction is the primary driver.
+    </div>
+    <a class="download-btn" href="https://iwaponline.com/jwcc/article/16/7/2358/108589/" target="_blank">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+      ACCESS PAPER — iwaponline.com
+    </a>
+  </div>
+
+  <!-- Paper 7 -->
+  <div class="paper-card">
+    <span class="paper-badge badge-doi">DOI / ResearchGate</span>
+    <div class="paper-title">Interpreting Land Subsidence Impacts Due to Groundwater Depletion Using Remote Sensing-Based GRACE Gravity Anomaly and DInSAR Technique — NW India</div>
+    <div class="paper-meta">ResearchGate · September 2021 · DOI: 10.1080/10106049.2022.2060322</div>
+    <div class="paper-desc">
+      Directly relevant for the Indo-Gangetic basin context covering Nepal and Bangladesh. Applies GRACE gravity anomaly time series combined with DInSAR to interpret subsidence caused by groundwater withdrawal in the transboundary aquifer system.
+    </div>
+    <div class="paper-findings">
+      <strong>KEY FINDING →</strong> The IGB comprises 25% of global groundwater withdrawals. PS-InSAR results indicate over 60.9% of monitored points experienced subsidence, with some areas reaching 100 cm between 2014–2022.
+    </div>
+    <a class="download-btn" href="https://www.researchgate.net/publication/354076797" target="_blank">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+      REQUEST PDF — researchgate.net
+    </a>
+  </div>
+</section>
+
+<!-- SECTION 2: SATELLITE SPECIFICATIONS -->
+<section>
+  <div class="section-head">
+    <span class="section-num">02</span>
+    <h2 class="section-title">Satellite Specifications</h2>
+    <div class="section-line"></div>
+  </div>
+
+  <div class="sat-grid">
+
+    <!-- GRACE-FO -->
+    <div class="sat-card">
+      <div class="sat-header">
+        <div>
+          <div class="sat-name">GRACE-FO</div>
+          <div class="sat-role">Gravity Recovery & Climate Experiment – Follow-On</div>
+        </div>
+        <span class="sat-type-badge type-gravity">GRAVITY</span>
+      </div>
+      <div class="sat-body">
+        <div class="sat-row"><span class="sat-key">Launch Date</span><span class="sat-val highlight">22 May 2018</span></div>
+        <div class="sat-row"><span class="sat-key">Launch Vehicle</span><span class="sat-val">SpaceX Falcon 9</span></div>
+        <div class="sat-row"><span class="sat-key">Orbit Altitude</span><span class="sat-val">~490 km (polar)</span></div>
+        <div class="sat-row"><span class="sat-key">Inclination</span><span class="sat-val">89°</span></div>
+        <div class="sat-row"><span class="sat-key">Inter-satellite Sep.</span><span class="sat-val">~220 km</span></div>
+        <div class="sat-row"><span class="sat-key">Measurement</span><span class="sat-val">Laser + microwave ranging (μm accuracy)</span></div>
+        <div class="sat-row"><span class="sat-key">Temporal Res.</span><span class="sat-val highlight">Monthly (~30 days)</span></div>
+        <div class="sat-row"><span class="sat-key">Spatial Res.</span><span class="sat-val">~300–400 km (TWS anomalies)</span></div>
+        <div class="sat-row"><span class="sat-key">Data Format</span><span class="sat-val">NetCDF (.nc), ASCII .txt, HDF5</span></div>
+        <div class="sat-row"><span class="sat-key">Data Product</span><span class="sat-val">Terrestrial Water Storage (TWS) anomalies (cm eq. water)</span></div>
+        <div class="sat-row"><span class="sat-key">Design Life</span><span class="sat-val">5 years (operational)</span></div>
+        <div class="sat-row"><span class="sat-key">Agencies</span><span class="sat-val">NASA / DLR (Germany)</span></div>
+        <div class="sat-row"><span class="sat-key">Data Latency</span><span class="sat-val">~3 months</span></div>
+        <div class="sat-row"><span class="sat-key">Download</span><span class="sat-val"><a href="https://gracefo.jpl.nasa.gov/data/grace-fo-data/" style="color:#00d4ff;font-size:11px;">gracefo.jpl.nasa.gov</a></span></div>
+      </div>
+    </div>
+
+    <!-- GRACE (original) -->
+    <div class="sat-card">
+      <div class="sat-header">
+        <div>
+          <div class="sat-name">GRACE</div>
+          <div class="sat-role">Gravity Recovery & Climate Experiment (Original)</div>
+        </div>
+        <span class="sat-type-badge type-gravity">GRAVITY</span>
+      </div>
+      <div class="sat-body">
+        <div class="sat-row"><span class="sat-key">Launch Date</span><span class="sat-val highlight">17 March 2002</span></div>
+        <div class="sat-row"><span class="sat-key">Launch Vehicle</span><span class="sat-val">Rockot (SS-19 + Briz)</span></div>
+        <div class="sat-row"><span class="sat-key">Launch Site</span><span class="sat-val">Plesetsk Cosmodrome, Russia</span></div>
+        <div class="sat-row"><span class="sat-key">End of Mission</span><span class="sat-val">27 October 2017</span></div>
+        <div class="sat-row"><span class="sat-key">Orbit Altitude</span><span class="sat-val">~500 km initial</span></div>
+        <div class="sat-row"><span class="sat-key">Inclination</span><span class="sat-val">89° (near-polar)</span></div>
+        <div class="sat-row"><span class="sat-key">Temporal Res.</span><span class="sat-val highlight">Monthly</span></div>
+        <div class="sat-row"><span class="sat-key">Spatial Res.</span><span class="sat-val">~150,000 km² minimum</span></div>
+        <div class="sat-row"><span class="sat-key">Data Format</span><span class="sat-val">NetCDF (.nc), ASCII</span></div>
+        <div class="sat-row"><span class="sat-key">Coverage Period</span><span class="sat-val">Apr 2002 – Oct 2017</span></div>
+        <div class="sat-row"><span class="sat-key">Successor</span><span class="sat-val">GRACE-FO (2018–present) → GRACE-C (2028)</span></div>
+        <div class="sat-row"><span class="sat-key">Download</span><span class="sat-val"><a href="https://grace.jpl.nasa.gov/data/get-data/" style="color:#00d4ff;font-size:11px;">grace.jpl.nasa.gov</a></span></div>
+      </div>
+    </div>
+
+    <!-- Sentinel-1A/C -->
+    <div class="sat-card">
+      <div class="sat-header">
+        <div>
+          <div class="sat-name">Sentinel-1A / 1C</div>
+          <div class="sat-role">C-Band SAR · ESA Copernicus Programme</div>
+        </div>
+        <span class="sat-type-badge type-sar">SAR / InSAR</span>
+      </div>
+      <div class="sat-body">
+        <div class="sat-row"><span class="sat-key">1A Launch</span><span class="sat-val highlight">3 April 2014</span></div>
+        <div class="sat-row"><span class="sat-key">1B Launch</span><span class="sat-val">25 April 2016 (retired Dec 2021)</span></div>
+        <div class="sat-row"><span class="sat-key">1C Launch</span><span class="sat-val highlight">5 December 2024</span></div>
+        <div class="sat-row"><span class="sat-key">1D Launch</span><span class="sat-val">November 2025</span></div>
+        <div class="sat-row"><span class="sat-key">Orbit Altitude</span><span class="sat-val">693 km</span></div>
+        <div class="sat-row"><span class="sat-key">Inclination</span><span class="sat-val">98.18° (sun-synchronous)</span></div>
+        <div class="sat-row"><span class="sat-key">Repeat Cycle</span><span class="sat-val highlight">12 days (6 days with dual satellite)</span></div>
+        <div class="sat-row"><span class="sat-key">Frequency Band</span><span class="sat-val">C-band · 5.405 GHz</span></div>
+        <div class="sat-row"><span class="sat-key">Wavelength</span><span class="sat-val">~5.6 cm (0.055465763 m)</span></div>
+        <div class="sat-row"><span class="sat-key">Spatial Res.</span><span class="sat-val">5 × 5 m (SM), 5 × 20 m (IW)</span></div>
+        <div class="sat-row"><span class="sat-key">Swath Width</span><span class="sat-val">Up to 410 km</span></div>
+        <div class="sat-row"><span class="sat-key">Polarizations</span><span class="sat-val">VV, VH, HH, HV</span></div>
+        <div class="sat-row"><span class="sat-key">Data Format</span><span class="sat-val">SAFE (.zip), SLC, GRD, NetCDF</span></div>
+        <div class="sat-row"><span class="sat-key">Radiometric Acc.</span><span class="sat-val">1 dB</span></div>
+        <div class="sat-row"><span class="sat-key">InSAR Accuracy</span><span class="sat-val">~1 cm displacement accuracy</span></div>
+        <div class="sat-row"><span class="sat-key">Download</span><span class="sat-val"><a href="https://dataspace.copernicus.eu" style="color:#00d4ff;font-size:11px;">dataspace.copernicus.eu</a></span></div>
+      </div>
+    </div>
+
+    <!-- ALOS-2 PALSAR-2 -->
+    <div class="sat-card">
+      <div class="sat-header">
+        <div>
+          <div class="sat-name">ALOS-2 (PALSAR-2)</div>
+          <div class="sat-role">L-Band SAR · JAXA Japan</div>
+        </div>
+        <span class="sat-type-badge type-sar">L-BAND SAR</span>
+      </div>
+      <div class="sat-body">
+        <div class="sat-row"><span class="sat-key">Launch Date</span><span class="sat-val highlight">24 May 2014</span></div>
+        <div class="sat-row"><span class="sat-key">Launch Vehicle</span><span class="sat-val">H-IIA Rocket, Japan</span></div>
+        <div class="sat-row"><span class="sat-key">Orbit Altitude</span><span class="sat-val">628 km</span></div>
+        <div class="sat-row"><span class="sat-key">Inclination</span><span class="sat-val">97.9° (sun-synchronous)</span></div>
+        <div class="sat-row"><span class="sat-key">Repeat Cycle</span><span class="sat-val highlight">14 days</span></div>
+        <div class="sat-row"><span class="sat-key">Frequency Band</span><span class="sat-val">L-band · 1.26 GHz</span></div>
+        <div class="sat-row"><span class="sat-key">Wavelength</span><span class="sat-val">~23.6 cm</span></div>
+        <div class="sat-row"><span class="sat-key">Spatial Res.</span><span class="sat-val">1–10 m (spotlight); 3–100 m (stripmap)</span></div>
+        <div class="sat-row"><span class="sat-key">Swath Width</span><span class="sat-val">Up to 490 km (ScanSAR)</span></div>
+        <div class="sat-row"><span class="sat-key">Data Format</span><span class="sat-val">CEOS SAR format (.img, .ldr, .trl)</span></div>
+        <div class="sat-row"><span class="sat-key">Advantage</span><span class="sat-val">Better coherence in vegetated/rural areas</span></div>
+        <div class="sat-row"><span class="sat-key">Download</span><span class="sat-val"><a href="https://auig2.jaxa.jp" style="color:#00d4ff;font-size:11px;">auig2.jaxa.jp (JAXA)</a></span></div>
+      </div>
+    </div>
+
+    <!-- ALOS-1 PALSAR -->
+    <div class="sat-card">
+      <div class="sat-header">
+        <div>
+          <div class="sat-name">ALOS-1 (PALSAR)</div>
+          <div class="sat-role">L-Band SAR · Historical Archive · JAXA</div>
+        </div>
+        <span class="sat-type-badge type-sar">L-BAND SAR</span>
+      </div>
+      <div class="sat-body">
+        <div class="sat-row"><span class="sat-key">Launch Date</span><span class="sat-val highlight">24 January 2006</span></div>
+        <div class="sat-row"><span class="sat-key">End of Mission</span><span class="sat-val">12 May 2011</span></div>
+        <div class="sat-row"><span class="sat-key">Orbit Altitude</span><span class="sat-val">691.65 km</span></div>
+        <div class="sat-row"><span class="sat-key">Inclination</span><span class="sat-val">98.16°</span></div>
+        <div class="sat-row"><span class="sat-key">Repeat Cycle</span><span class="sat-val highlight">46 days</span></div>
+        <div class="sat-row"><span class="sat-key">Frequency Band</span><span class="sat-key">L-band · 1.27 GHz</span></div>
+        <div class="sat-row"><span class="sat-key">Spatial Res.</span><span class="sat-val">7–100 m</span></div>
+        <div class="sat-row"><span class="sat-key">Data Format</span><span class="sat-val">CEOS / GeoTIFF</span></div>
+        <div class="sat-row"><span class="sat-key">Use in Nepal</span><span class="sat-val">Pre-seismic Kathmandu Basin subsidence studies</span></div>
+        <div class="sat-row"><span class="sat-key">Download</span><span class="sat-val"><a href="https://search.asf.alaska.edu" style="color:#00d4ff;font-size:11px;">search.asf.alaska.edu (ASF)</a></span></div>
+      </div>
+    </div>
+
+    <!-- Landsat-8/9 -->
+    <div class="sat-card">
+      <div class="sat-header">
+        <div>
+          <div class="sat-name">Landsat 8 / 9</div>
+          <div class="sat-role">Multispectral Optical · NASA / USGS</div>
+        </div>
+        <span class="sat-type-badge type-optical">OPTICAL</span>
+      </div>
+      <div class="sat-body">
+        <div class="sat-row"><span class="sat-key">L8 Launch</span><span class="sat-val highlight">11 February 2013</span></div>
+        <div class="sat-row"><span class="sat-key">L9 Launch</span><span class="sat-val highlight">27 September 2021</span></div>
+        <div class="sat-row"><span class="sat-key">Orbit Altitude</span><span class="sat-val">705 km</span></div>
+        <div class="sat-row"><span class="sat-key">Inclination</span><span class="sat-val">98.2° (sun-synchronous)</span></div>
+        <div class="sat-row"><span class="sat-key">Repeat Cycle</span><span class="sat-val highlight">16 days (8 days combined L8+L9)</span></div>
+        <div class="sat-row"><span class="sat-key">Spatial Res.</span><span class="sat-val">30 m (multispectral), 15 m (pan)</span></div>
+        <div class="sat-row"><span class="sat-key">Bands</span><span class="sat-val">11 bands (B1–B11 including TIRS)</span></div>
+        <div class="sat-row"><span class="sat-key">Data Format</span><span class="sat-val">GeoTIFF (.tif), ENVI, HDF</span></div>
+        <div class="sat-row"><span class="sat-key">Use Case</span><span class="sat-val">Land cover / LULC for groundwater recharge mapping</span></div>
+        <div class="sat-row"><span class="sat-key">Download</span><span class="sat-val"><a href="https://earthexplorer.usgs.gov" style="color:#00d4ff;font-size:11px;">earthexplorer.usgs.gov</a></span></div>
+      </div>
+    </div>
+
+    <!-- GLDAS (Model Data) -->
+    <div class="sat-card">
+      <div class="sat-header">
+        <div>
+          <div class="sat-name">GLDAS-2</div>
+          <div class="sat-role">Global Land Data Assimilation System · NASA GSFC</div>
+        </div>
+        <span class="sat-type-badge type-model">MODEL DATA</span>
+      </div>
+      <div class="sat-body">
+        <div class="sat-row"><span class="sat-key">Type</span><span class="sat-val">Land Surface Model (not a satellite)</span></div>
+        <div class="sat-row"><span class="sat-key">Data From</span><span class="sat-val">1948 – present (various versions)</span></div>
+        <div class="sat-row"><span class="sat-key">Spatial Res.</span><span class="sat-val">0.25° × 0.25° (~28 km)</span></div>
+        <div class="sat-row"><span class="sat-key">Temporal Res.</span><span class="sat-val highlight">3-hourly, monthly</span></div>
+        <div class="sat-row"><span class="sat-key">Models</span><span class="sat-val">Noah, VIC, CLM, MOSAIC</span></div>
+        <div class="sat-row"><span class="sat-key">Variables</span><span class="sat-val">Soil moisture, canopy water, SWE, ET</span></div>
+        <div class="sat-row"><span class="sat-key">Data Format</span><span class="sat-val">NetCDF (.nc4), HDF5</span></div>
+        <div class="sat-row"><span class="sat-key">Key Use</span><span class="sat-val">Isolate groundwater from GRACE TWS (GWS = TWS – SM – SWE – SW)</span></div>
+        <div class="sat-row"><span class="sat-key">Download</span><span class="sat-val"><a href="https://disc.gsfc.nasa.gov/datasets?keywords=GLDAS" style="color:#00d4ff;font-size:11px;">disc.gsfc.nasa.gov</a></span></div>
+      </div>
+    </div>
+
+    <!-- SRTM DEM -->
+    <div class="sat-card">
+      <div class="sat-header">
+        <div>
+          <div class="sat-name">SRTM / NASADEM</div>
+          <div class="sat-role">Digital Elevation Model · NASA / NGA</div>
+        </div>
+        <span class="sat-type-badge type-optical">DEM</span>
+      </div>
+      <div class="sat-body">
+        <div class="sat-row"><span class="sat-key">SRTM Mission</span><span class="sat-val highlight">11–22 February 2000</span></div>
+        <div class="sat-row"><span class="sat-key">Spatial Res.</span><span class="sat-val highlight">30 m (1 arc-second), 90 m (3 arc-sec)</span></div>
+        <div class="sat-row"><span class="sat-key">Coverage</span><span class="sat-val">56°S – 60°N (near-global)</span></div>
+        <div class="sat-row"><span class="sat-key">Data Format</span><span class="sat-val">GeoTIFF (.tif), HGT, DTED</span></div>
+        <div class="sat-row"><span class="sat-key">Use Case</span><span class="sat-val">InSAR topographic phase removal (DEM correction)</span></div>
+        <div class="sat-row"><span class="sat-key">Download</span><span class="sat-val"><a href="https://earthexplorer.usgs.gov" style="color:#00d4ff;font-size:11px;">earthexplorer.usgs.gov</a></span></div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- SECTION 3: DATA DOWNLOAD PORTALS -->
+<section>
+  <div class="section-head">
+    <span class="section-num">03</span>
+    <h2 class="section-title">Data Download Portals</h2>
+    <div class="section-line"></div>
+  </div>
+
+  <div class="table-wrap">
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>Dataset</th>
+          <th>Portal / Platform</th>
+          <th>Format</th>
+          <th>Free?</th>
+          <th>Direct URL</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>GRACE / GRACE-FO TWS Mascon</td>
+          <td>NASA JPL GRACE Tellus</td>
+          <td class="mono">NetCDF .nc</td>
+          <td>✅ Free</td>
+          <td class="link-cell"><a href="https://grace.jpl.nasa.gov/data/get-data/" target="_blank">grace.jpl.nasa.gov/data/get-data</a></td>
+        </tr>
+        <tr>
+          <td>GRACE-FO Level-2 & Level-3</td>
+          <td>GRACE-FO JPL Portal</td>
+          <td class="mono">NetCDF, ASCII</td>
+          <td>✅ Free</td>
+          <td class="link-cell"><a href="https://gracefo.jpl.nasa.gov/data/grace-fo-data/" target="_blank">gracefo.jpl.nasa.gov/data</a></td>
+        </tr>
+        <tr>
+          <td>GRACE Mascon (CSR RL06)</td>
+          <td>University of Texas CSR</td>
+          <td class="mono">NetCDF .nc</td>
+          <td>✅ Free</td>
+          <td class="link-cell"><a href="http://www2.csr.utexas.edu/grace/RL06_mascons.html" target="_blank">csr.utexas.edu/grace</a></td>
+        </tr>
+        <tr>
+          <td>Sentinel-1 SLC / GRD Images</td>
+          <td>Copernicus Data Space Ecosystem</td>
+          <td class="mono">SAFE .zip / SLC</td>
+          <td>✅ Free (register)</td>
+          <td class="link-cell"><a href="https://dataspace.copernicus.eu" target="_blank">dataspace.copernicus.eu</a></td>
+        </tr>
+        <tr>
+          <td>Sentinel-1 (ASF Alaska)</td>
+          <td>NASA Alaska Satellite Facility</td>
+          <td class="mono">SLC, GRD, RTC</td>
+          <td>✅ Free</td>
+          <td class="link-cell"><a href="https://search.asf.alaska.edu" target="_blank">search.asf.alaska.edu</a></td>
+        </tr>
+        <tr>
+          <td>LiCSAR InSAR Products (Sentinel-1)</td>
+          <td>COMET / University of Leeds</td>
+          <td class="mono">Unwrapped .unw GeoTIFF</td>
+          <td>✅ Free</td>
+          <td class="link-cell"><a href="https://comet.nerc.ac.uk/COMET-LiCS-portal/" target="_blank">comet.nerc.ac.uk/COMET-LiCS</a></td>
+        </tr>
+        <tr>
+          <td>ALOS-1 PALSAR (Historical)</td>
+          <td>Alaska Satellite Facility</td>
+          <td class="mono">CEOS / GeoTIFF</td>
+          <td>✅ Free</td>
+          <td class="link-cell"><a href="https://search.asf.alaska.edu" target="_blank">search.asf.alaska.edu</a></td>
+        </tr>
+        <tr>
+          <td>ALOS-2 PALSAR-2</td>
+          <td>JAXA AUIG2 Portal</td>
+          <td class="mono">CEOS .img</td>
+          <td>⚠ Registration required</td>
+          <td class="link-cell"><a href="https://auig2.jaxa.jp" target="_blank">auig2.jaxa.jp</a></td>
+        </tr>
+        <tr>
+          <td>GLDAS-2 (Soil Moisture, ET)</td>
+          <td>NASA GES DISC</td>
+          <td class="mono">NetCDF .nc4 / HDF5</td>
+          <td>✅ Free (Earthdata login)</td>
+          <td class="link-cell"><a href="https://disc.gsfc.nasa.gov/datasets?keywords=GLDAS" target="_blank">disc.gsfc.nasa.gov</a></td>
+        </tr>
+        <tr>
+          <td>Landsat 8/9 (LULC, LST)</td>
+          <td>USGS Earth Explorer</td>
+          <td class="mono">GeoTIFF .tif</td>
+          <td>✅ Free</td>
+          <td class="link-cell"><a href="https://earthexplorer.usgs.gov" target="_blank">earthexplorer.usgs.gov</a></td>
+        </tr>
+        <tr>
+          <td>SRTM DEM / NASADEM</td>
+          <td>USGS Earth Explorer / NASA</td>
+          <td class="mono">GeoTIFF / HGT</td>
+          <td>✅ Free</td>
+          <td class="link-cell"><a href="https://earthexplorer.usgs.gov" target="_blank">earthexplorer.usgs.gov</a></td>
+        </tr>
+        <tr>
+          <td>GACOS Atmospheric Correction</td>
+          <td>Newcastle University GACOS</td>
+          <td class="mono">ZTD .ztd files</td>
+          <td>✅ Free (registration)</td>
+          <td class="link-cell"><a href="http://www.gacos.net" target="_blank">gacos.net</a></td>
+        </tr>
+        <tr>
+          <td>GPM Precipitation (IMERG)</td>
+          <td>NASA GES DISC</td>
+          <td class="mono">NetCDF .nc4 / HDF5</td>
+          <td>✅ Free</td>
+          <td class="link-cell"><a href="https://disc.gsfc.nasa.gov/datasets?keywords=GPM" target="_blank">disc.gsfc.nasa.gov/GPM</a></td>
+        </tr>
+        <tr>
+          <td>All datasets via GEE</td>
+          <td>Google Earth Engine</td>
+          <td class="mono">Cloud-based (ee.Image)</td>
+          <td>✅ Free (research)</td>
+          <td class="link-cell"><a href="https://earthengine.google.com" target="_blank">earthengine.google.com</a></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- SECTION 4: METHODOLOGY -->
+<section>
+  <div class="section-head">
+    <span class="section-num">04</span>
+    <h2 class="section-title">Research Methodology Workflow</h2>
+    <div class="section-line"></div>
+  </div>
+
+  <div class="flow-grid">
+    <div class="flow-step">
+      <div class="flow-num">01</div>
+      <div class="flow-title">GRACE/GRACE-FO TWS Extraction</div>
+      <div class="flow-desc">Download monthly Level-3 Mascon data (RL06 from JPL/CSR/GFZ). Apply glacial isostatic adjustment (GIA). Extract TWS anomalies over Nepal and Bangladesh grids.</div>
+    </div>
+    <div class="flow-step">
+      <div class="flow-num">02</div>
+      <div class="flow-title">GWS Isolation (GLDAS)</div>
+      <div class="flow-desc">Download GLDAS-2.1 Noah model data. GWS = TWS – Soil Moisture – Snow Water Equivalent – Surface Water. This isolates groundwater storage change signal.</div>
+    </div>
+    <div class="flow-step">
+      <div class="flow-num">03</div>
+      <div class="flow-title">InSAR Processing (SBAS / PS)</div>
+      <div class="flow-desc">Download Sentinel-1 SLC scenes. Process with SNAP + StaMPS / LiCSBAS / MintPy. Apply GACOS atmospheric correction. Generate displacement velocity maps (mm/year LOS).</div>
+    </div>
+    <div class="flow-step">
+      <div class="flow-num">04</div>
+      <div class="flow-title">Subsidence Mapping</div>
+      <div class="flow-desc">Convert LOS displacement to vertical using incidence angle. Apply SBAS time series analysis. Identify subsidence bowls and hotspot zones at mm-scale resolution.</div>
+    </div>
+    <div class="flow-step">
+      <div class="flow-num">05</div>
+      <div class="flow-title">Correlation Analysis</div>
+      <div class="flow-desc">Apply Dynamic Time Warping (DTW) or Pearson correlation between GWS time series and InSAR displacement. Incorporate borehole GWL data for validation.</div>
+    </div>
+    <div class="flow-step">
+      <div class="flow-num">06</div>
+      <div class="flow-title">AI Prediction Model</div>
+      <div class="flow-desc">Train LSTM / Random Forest / XGBoost models on historical GRACE + InSAR + precipitation time series. Predict future groundwater depletion and subsidence rates.</div>
+    </div>
+    <div class="flow-step">
+      <div class="flow-num">07</div>
+      <div class="flow-title">Validation</div>
+      <div class="flow-desc">Cross-validate InSAR results with GPS station data and in-situ well measurements. Validate GRACE GWS with published groundwater level reports from BWDB (Bangladesh) and DWRI (Nepal).</div>
+    </div>
+    <div class="flow-step">
+      <div class="flow-num">08</div>
+      <div class="flow-title">Risk Mapping</div>
+      <div class="flow-desc">Overlay subsidence maps with population density, infrastructure, and flood-risk layers. Generate annual risk maps and future projection scenarios (2030, 2050).</div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 5: AI/ML APPLICATIONS -->
+<section>
+  <div class="section-head">
+    <span class="section-num">05</span>
+    <h2 class="section-title">AI &amp; Machine Learning Applications</h2>
+    <div class="section-line"></div>
+  </div>
+
+  <div class="ai-grid">
+    <div class="ai-card">
+      <div class="ai-icon">🧠</div>
+      <div class="ai-title">LSTM / GRU Networks</div>
+      <div class="ai-desc">Long Short-Term Memory networks trained on GRACE monthly time series for multi-step groundwater storage forecasting. Captures seasonal monsoon patterns effectively.</div>
+    </div>
+    <div class="ai-card">
+      <div class="ai-icon">🌲</div>
+      <div class="ai-title">Random Forest / XGBoost</div>
+      <div class="ai-desc">Ensemble models for predicting subsidence magnitude using InSAR, GRACE, LULC, geology, and population density as features. Used in the Nature Communications global mapping study.</div>
+    </div>
+    <div class="ai-card">
+      <div class="ai-icon">🖼</div>
+      <div class="ai-title">U-Net (Deep Learning)</div>
+      <div class="ai-desc">Convolutional neural network (encoder-decoder) applied to SAR imagery for semantic segmentation of subsidence zones and flood mapping. Used in the ISPRS 2023 IGB study.</div>
+    </div>
+    <div class="ai-card">
+      <div class="ai-icon">📐</div>
+      <div class="ai-title">DTW Similarity Analysis</div>
+      <div class="ai-desc">Dynamic Time Warping quantifies the temporal similarity between GRACE GWS time series and InSAR subsidence time series even when signals are temporally offset.</div>
+    </div>
+    <div class="ai-card">
+      <div class="ai-icon">📊</div>
+      <div class="ai-title">Mann-Kendall Trend Test</div>
+      <div class="ai-desc">Non-parametric statistical method applied to GRACE TWS time series to detect statistically significant long-term depletion trends in each hydrological region.</div>
+    </div>
+    <div class="ai-card">
+      <div class="ai-icon">🔗</div>
+      <div class="ai-title">Ensemble Data Fusion</div>
+      <div class="ai-desc">Combining GRACE (large-scale gravity), InSAR (fine-scale deformation), GLDAS (soil moisture), and GPS/well data using Kalman-filter or ML ensemble approaches.</div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER NOTE -->
+<div class="footer-note">
+  <span class="footer-icon">📌</span>
+  <div class="footer-text">
+    <strong>Recommended citation style:</strong> When using GRACE-FO data, cite the JPL GRACE Tellus data portal and the appropriate processing center (CSR RL06, JPL RL06M, or GFZ RL06). When using Sentinel-1 InSAR, cite ESA Copernicus and the processing software (e.g., LiCSBAS, StaMPS, MintPy). All papers listed above should be independently verified for open-access status before use. 
+    <br>Compiled April 2026 · For research in Nepal and Bangladesh groundwater–subsidence monitoring.
+  </div>
+</div>
+
+</body>
+</html>
